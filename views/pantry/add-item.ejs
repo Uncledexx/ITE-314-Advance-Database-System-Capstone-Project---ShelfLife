@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShelfLife - Add Item</title>
+</head>
+
+<body>
+
+    <h1>Add Pantry Item</h1>
+
+    <form action="/pantry" method="POST">
+
+        <div>
+
+            <label for="name">
+                Food Name:
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                required
+            >
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label for="category_id">
+                Category:
+            </label>
+
+            <select
+                id="category_id"
+                name="category_id"
+                required
+            >
+
+                <option value="">
+                    Select a category
+                </option>
+
+                <% categories.forEach(category => { %>
+
+                    <option value="<%= category.id %>">
+                        <%= category.name %>
+                    </option>
+
+                <% }); %>
+
+            </select>
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label for="quantity">
+                Quantity:
+            </label>
+
+            <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                required
+            >
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label for="purchase_date">
+                Purchase Date:
+            </label>
+
+            <input
+                type="date"
+                id="purchase_date"
+                name="purchase_date"
+                required
+            >
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label for="expiration_date">
+                Expiration Date:
+            </label>
+
+            <input
+                type="date"
+                id="expiration_date"
+                name="expiration_date"
+                required
+            >
+
+        </div>
+
+        <br>
+
+        <button type="submit">
+            Add Item
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/pantry">
+        Back to Pantry
+    </a>
+
+</body>
+
+</html>

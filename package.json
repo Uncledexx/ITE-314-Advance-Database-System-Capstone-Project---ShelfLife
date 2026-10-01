@@ -1,0 +1,37 @@
+{
+  "name": "ite-314-advance-database-system-capstone-project---shelflife",
+  "version": "1.0.0",
+  "description": "ShelfLife is a web-based personal pantry and inventory management app built with Node.js, Express.js, and MySQL. It helps households, students, and individuals organize home food supplies, track expiration dates, and reduce food waste.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Uncledexx/ITE-314-Advance-Database-System-Capstone-Project---ShelfLife.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Uncledexx/ITE-314-Advance-Database-System-Capstone-Project---ShelfLife/issues"
+  },
+  "homepage": "https://github.com/Uncledexx/ITE-314-Advance-Database-System-Capstone-Project---ShelfLife#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.5",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.24.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

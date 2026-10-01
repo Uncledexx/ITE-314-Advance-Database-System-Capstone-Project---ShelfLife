@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShelfLife - Edit Item</title>
+</head>
+
+<body>
+
+    <h1>Edit Pantry Item</h1>
+
+    <form
+        action="/pantry/edit/<%= item.id %>"
+        method="POST"
+    >
+
+        <div>
+
+            <label for="name">
+                Food Name:
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="<%= item.name %>"
+                required
+            >
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label for="category_id">
+                Category:
+            </label>
+
+            <select
+                id="category_id"
+                name="category_id"
+                required
+            >
+
+                <% categories.forEach(category => { %>
+
+                    <option
+                        value="<%= category.id %>"
+                        <%= category.id === item.category_id ? 'selected' : '' %>
+                    >
+                        <%= category.name %>
+                    </option>
+
+                <% }); %>
+
+            </select>
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label for="quantity">
+                Quantity:
+            </label>
+
+            <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                value="<%= item.quantity %>"
+                required
+            >
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label for="purchase_date">
+                Purchase Date:
+            </label>
+
+            <input
+                type="date"
+                id="purchase_date"
+                name="purchase_date"
+               value="<%= item.purchase_date.getFullYear() %>-<%= String(item.purchase_date.getMonth() + 1).padStart(2, '0') %>-<%= String(item.purchase_date.getDate()).padStart(2, '0') %>"
+                required
+            >
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label for="expiration_date">
+                Expiration Date:
+            </label>
+
+            <input
+                type="date"
+                id="expiration_date"
+                name="expiration_date"
+               value="<%= item.expiration_date.getFullYear() %>-<%= String(item.expiration_date.getMonth() + 1).padStart(2, '0') %>-<%= String(item.expiration_date.getDate()).padStart(2, '0') %>"
+                required
+            >
+
+        </div>
+
+        <br>
+
+        <button type="submit">
+            Save Changes
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/pantry">
+        Cancel
+    </a>
+
+</body>
+
+</html>
