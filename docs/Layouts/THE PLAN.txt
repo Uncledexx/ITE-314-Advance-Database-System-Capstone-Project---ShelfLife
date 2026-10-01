@@ -1,0 +1,885 @@
+============================================================
+                  SHELFLIFE WEBSITE PLAN
+============================================================
+
+PROJECT TITLE:
+
+SHELFLIFE: A WEB-BASED PERSONAL PANTRY AND
+EXPIRATION DATE TRACKER
+
+
+============================================================
+                    1. PROJECT OVERVIEW
+============================================================
+
+ShelfLife is a web-based pantry management system designed
+to help users organize and monitor food items stored at home.
+
+The system allows users to record pantry items, manage
+quantities, monitor expiration dates, and identify food that
+is expiring soon or has already expired.
+
+Users can also mark food items as consumed. Consumed items
+can be recorded in a history section so that users can keep
+track of previously used food.
+
+The system will use Node.js and Express.js for the backend
+and MySQL as the relational database.
+
+
+============================================================
+                    2. PROJECT GOAL
+============================================================
+
+The main goal of ShelfLife is to provide a simple and
+organized way for users to manage their pantry inventory
+while helping them monitor expiration dates and reduce
+unnecessary food waste.
+
+
+============================================================
+                    3. TARGET USERS
+============================================================
+
+PRIMARY USERS:
+
+- Individuals managing their personal pantry
+- Students living independently
+- Families or households managing food supplies
+
+
+============================================================
+                    4. MAIN WEBSITE PAGES
+============================================================
+
+The website will contain the following main pages:
+
+1. LOGIN PAGE
+2. DASHBOARD
+3. PANTRY
+4. ADD ITEM
+5. EXPIRING SOON
+6. CONSUMPTION HISTORY
+7. CATEGORIES
+8. PROFILE / ACCOUNT
+
+
+============================================================
+                    5. LOGIN PAGE
+============================================================
+
+PURPOSE:
+
+Allows users to securely access their ShelfLife account.
+
+FEATURES:
+
+- Email/username input
+- Password input
+- Login button
+- Register account option
+- Basic login validation
+
+USER FLOW:
+
+User enters credentials
+        ↓
+Node.js validates the information
+        ↓
+MySQL checks the user account
+        ↓
+Successful login
+        ↓
+Dashboard
+
+
+============================================================
+                    6. DASHBOARD
+============================================================
+
+PURPOSE:
+
+Provides an overview of the user's pantry.
+
+MAIN INFORMATION:
+
++--------------------------------+
+|        SHELFLIFE DASHBOARD     |
++--------------------------------+
+
+Total Pantry Items
+[ 12 ]
+
+Expiring Soon
+[ 3 ]
+
+Expired Items
+[ 1 ]
+
+Consumed Items
+[ 8 ]
+
+
+DASHBOARD FEATURES:
+
+- Total number of active pantry items
+- Number of items expiring soon
+- Number of expired items
+- Number of consumed items
+- Recently added items
+- Items that need attention
+
+
+EXAMPLE:
+
+RECENT PANTRY ITEMS
+
+Milk             Dairy       Sept. 30
+Canned Tuna      Canned      Dec. 15
+Bread            Bakery      Sept. 28
+
+
+============================================================
+                    7. PANTRY PAGE
+============================================================
+
+PURPOSE:
+
+Displays all active food items currently stored in the
+user's pantry.
+
+EXAMPLE:
+
++----------------------------------------------------------+
+| FOOD          | CATEGORY | QTY | EXPIRATION | STATUS     |
++----------------------------------------------------------+
+| Milk          | Dairy    |  2  | Sept. 30   | Expiring   |
+| Tuna          | Canned   |  4  | Dec. 15    | Available  |
+| Bread         | Bakery   |  1  | Sept. 28   | Expired    |
++----------------------------------------------------------+
+
+
+FEATURES:
+
+- View pantry items
+- Search items
+- Filter by category
+- Sort by expiration date
+- Edit item
+- Delete item
+- Mark item as consumed
+- Add new item
+
+
+============================================================
+                    8. ADD ITEM
+============================================================
+
+PURPOSE:
+
+Allows users to add a new food item to their pantry.
+
+INPUT FIELDS:
+
+Food Name
+Category
+Quantity
+Purchase Date
+Expiration Date
+
+
+EXAMPLE:
+
+Food Name:
+[ Milk                         ]
+
+Category:
+[ Dairy                        ]
+
+Quantity:
+[ 2                            ]
+
+Purchase Date:
+[ 09/20/2026                   ]
+
+Expiration Date:
+[ 09/30/2026                   ]
+
+[ SAVE ITEM ]
+
+
+SYSTEM PROCESS:
+
+User enters item information
+        ↓
+Form validation
+        ↓
+Node.js receives the data
+        ↓
+Node.js sends SQL query
+        ↓
+MySQL stores the item
+        ↓
+Item appears in Pantry
+
+
+============================================================
+                    9. EXPIRATION TRACKING
+============================================================
+
+PURPOSE:
+
+Automatically determine the status of pantry items based on
+their expiration date.
+
+STATUS TYPES:
+
+AVAILABLE
+- More than 7 days before expiration
+
+EXPIRING SOON
+- 1 to 7 days before expiration
+
+EXPIRED
+- Expiration date has already passed
+
+CONSUMED
+- User has already eaten or used the item
+
+
+EXAMPLE:
+
+Milk
+Expiration: September 30
+
+Current Date: September 27
+
+Status:
+EXPIRING SOON
+
+
+IMPORTANT:
+
+The user does not need to manually enter the expiration
+status. The system calculates the status based on the
+expiration date.
+
+
+============================================================
+                    10. EXPIRING SOON PAGE
+============================================================
+
+PURPOSE:
+
+Shows pantry items that are approaching their expiration
+date.
+
+EXAMPLE:
+
+ITEMS EXPIRING SOON
+
+------------------------------------------------------------
+Milk
+Quantity: 2
+Expires: September 30, 2026
+Status: Expiring Soon
+------------------------------------------------------------
+
+Bread
+Quantity: 1
+Expires: September 29, 2026
+Status: Expiring Soon
+------------------------------------------------------------
+
+
+FEATURES:
+
+- View items expiring soon
+- Sort by nearest expiration date
+- Mark item as consumed
+- Edit item
+
+
+============================================================
+                    11. MARK AS CONSUMED
+============================================================
+
+PURPOSE:
+
+Allows users to update the pantry when they have eaten or
+used a food item.
+
+EXAMPLE:
+
+Milk
+Quantity: 2
+
+User consumes 1
+
+NEW QUANTITY:
+1
+
+
+The system should allow the user to either:
+
+A. Reduce the quantity
+
+OR
+
+B. Mark the entire item as consumed
+
+
+RECOMMENDED:
+
+If quantity becomes 0:
+
+Milk
+Quantity: 0
+Status: Consumed
+
+
+The item is removed from the active pantry list and stored
+in the Consumption History.
+
+
+============================================================
+                    12. CONSUMPTION HISTORY
+============================================================
+
+PURPOSE:
+
+Stores records of food items that have already been
+consumed.
+
+EXAMPLE:
+
++----------------------------------------------------------+
+| FOOD       | QUANTITY | DATE CONSUMED                    |
++----------------------------------------------------------+
+| Milk       |    1     | September 27, 2026              |
+| Bread      |    1     | September 26, 2026              |
+| Tuna       |    2     | September 25, 2026              |
++----------------------------------------------------------+
+
+
+FEATURES:
+
+- View consumed items
+- View quantity consumed
+- View date consumed
+- Search consumption records
+
+
+============================================================
+                    13. EDIT ITEM
+============================================================
+
+PURPOSE:
+
+Allows users to correct or update pantry information.
+
+Users can edit:
+
+- Food name
+- Category
+- Quantity
+- Purchase date
+- Expiration date
+
+EXAMPLE:
+
+Milk
+Quantity: 2 → 3
+
+Expiration:
+September 30 → October 2
+
+
+============================================================
+                    14. DELETE ITEM
+============================================================
+
+PURPOSE:
+
+Allows users to remove an item that was entered incorrectly
+or is no longer needed.
+
+Example:
+
+User clicks:
+
+[ DELETE ]
+
+System asks:
+
+"Are you sure you want to delete this item?"
+
+[ CANCEL ]       [ DELETE ]
+
+
+============================================================
+                    15. SEARCH AND FILTER
+============================================================
+
+PURPOSE:
+
+Helps users quickly find pantry items.
+
+SEARCH:
+
+[ Search food... ]
+
+Examples:
+
+Milk
+Bread
+Tuna
+
+
+FILTER BY CATEGORY:
+
+- All
+- Dairy
+- Canned Goods
+- Bakery
+- Snacks
+- Beverages
+- Frozen Foods
+- Condiments
+
+
+FILTER BY STATUS:
+
+- Available
+- Expiring Soon
+- Expired
+
+
+============================================================
+                    16. CATEGORY MANAGEMENT
+============================================================
+
+PURPOSE:
+
+Organizes pantry items into different categories.
+
+DEFAULT CATEGORIES:
+
+- Dairy
+- Canned Goods
+- Bakery
+- Snacks
+- Beverages
+- Frozen Foods
+- Condiments
+- Other
+
+
+The category system can be stored in a separate MySQL
+table to demonstrate database relationships.
+
+
+============================================================
+                    17. DATABASE DESIGN
+============================================================
+
+The system will use a relational MySQL database.
+
+MAIN TABLES:
+
+1. users
+2. categories
+3. pantry_items
+4. consumption_history
+
+
+------------------------------------------------------------
+TABLE: users
+------------------------------------------------------------
+
+id
+name
+email
+password
+created_at
+
+
+------------------------------------------------------------
+TABLE: categories
+------------------------------------------------------------
+
+id
+name
+
+
+------------------------------------------------------------
+TABLE: pantry_items
+------------------------------------------------------------
+
+id
+user_id
+category_id
+name
+quantity
+purchase_date
+expiration_date
+created_at
+
+
+------------------------------------------------------------
+TABLE: consumption_history
+------------------------------------------------------------
+
+id
+pantry_item_id
+quantity
+consumed_at
+
+
+============================================================
+                    18. DATABASE RELATIONSHIPS
+============================================================
+
+USERS
+  |
+  | 1
+  |
+  | MANY
+  ↓
+PANTRY_ITEMS
+  |
+  | MANY
+  |
+  ↓
+CONSUMPTION_HISTORY
+
+
+USERS
+  |
+  | MANY
+  |
+  ↓
+PANTRY_ITEMS
+  |
+  |
+  +---- category_id ----> CATEGORIES
+
+
+RELATIONSHIPS:
+
+One user can have many pantry items.
+
+One category can contain many pantry items.
+
+One pantry item can have consumption records.
+
+
+============================================================
+                    19. TECHNOLOGY STACK
+============================================================
+
+FRONTEND:
+
+HTML
+CSS
+JavaScript
+Bootstrap (Optional)
+
+
+BACKEND:
+
+Node.js
+Express.js
+
+
+DATABASE:
+
+MySQL
+
+
+NODE.JS PACKAGES:
+
+express
+mysql2
+dotenv
+cors
+
+Optional:
+
+bcrypt
+express-session
+
+
+============================================================
+                    20. NODE.JS FUNCTIONALITY
+============================================================
+
+Node.js will act as the backend of the application.
+
+MAIN FUNCTIONS:
+
+POST
+- Add pantry item
+- Register user
+- Login user
+
+GET
+- Get pantry items
+- Get categories
+- Get dashboard statistics
+- Get consumption history
+
+PUT
+- Update pantry item
+- Update quantity
+
+DELETE
+- Delete pantry item
+
+
+EXAMPLE API ROUTES:
+
+POST /api/pantry
+GET /api/pantry
+GET /api/pantry/:id
+PUT /api/pantry/:id
+DELETE /api/pantry/:id
+
+GET /api/categories
+POST /api/categories
+
+GET /api/history
+
+GET /api/dashboard
+
+
+============================================================
+                    21. CRUD OPERATIONS
+============================================================
+
+CREATE
+
+Add a new pantry item.
+
+
+READ
+
+View pantry items and information.
+
+
+UPDATE
+
+Edit item information or quantity.
+
+
+DELETE
+
+Remove a pantry item.
+
+
+ShelfLife will demonstrate complete CRUD operations using
+Node.js, Express.js, and MySQL.
+
+
+============================================================
+                    22. BASIC USER FLOW
+============================================================
+
+                    START
+                      |
+                      ↓
+                   LOGIN
+                      |
+                      ↓
+                  DASHBOARD
+                      |
+          +-----------+-----------+
+          |           |           |
+          ↓           ↓           ↓
+       PANTRY      EXPIRING    HISTORY
+          |
+          ↓
+      ADD ITEM
+          |
+          ↓
+     SAVE TO MYSQL
+          |
+          ↓
+     VIEW ITEM
+          |
+     +----+----+
+     |         |
+     ↓         ↓
+   EDIT     CONSUME
+               |
+               ↓
+       CONSUMPTION HISTORY
+
+
+============================================================
+                    23. WEBSITE NAVIGATION
+============================================================
+
+SIDEBAR / NAVIGATION MENU:
+
+[ LOGO - ShelfLife ]
+
+Dashboard
+Pantry
+Add Item
+Expiring Soon
+Consumption History
+Categories
+Profile
+Logout
+
+
+============================================================
+                    24. SIMPLE UI DESIGN
+============================================================
+
+COLOR THEME:
+
+Primary Color:
+Green
+
+Secondary Color:
+Light Green
+
+Background:
+White / Light Gray
+
+Warning:
+Yellow / Orange
+
+Expired:
+Red
+
+Consumed:
+Blue / Gray
+
+
+DESIGN STYLE:
+
+- Clean
+- Simple
+- User-friendly
+- Responsive
+- Easy to navigate
+- Minimal unnecessary elements
+
+
+============================================================
+                    25. MAIN FEATURES SUMMARY
+============================================================
+
+CORE FEATURES:
+
+[✓] User Login
+[✓] Dashboard
+[✓] Add Pantry Item
+[✓] View Pantry Items
+[✓] Edit Pantry Items
+[✓] Delete Pantry Items
+[✓] Track Quantity
+[✓] Track Expiration Date
+[✓] Automatic Expiration Status
+[✓] Expiring Soon List
+[✓] Mark as Consumed
+[✓] Consumption History
+[✓] Search Items
+[✓] Filter Items
+[✓] Category Management
+[✓] MySQL Database
+[✓] Node.js Backend
+[✓] Express.js API
+
+
+============================================================
+                    26. PROJECT SCOPE
+============================================================
+
+ShelfLife will focus on personal pantry management.
+
+The project will NOT include:
+
+- Online grocery shopping
+- Online payments
+- Barcode scanning
+- AI food recognition
+- Delivery services
+- Advanced nutritional tracking
+- Automatic grocery ordering
+
+
+The purpose of limiting these features is to keep the project
+manageable for a mini-capstone while still demonstrating
+database management and Node.js development.
+
+
+============================================================
+                    27. MINIMUM VIABLE VERSION
+============================================================
+
+If development time becomes limited, the following features
+should be completed first:
+
+1. Add Pantry Item
+2. View Pantry Items
+3. Edit Pantry Item
+4. Delete Pantry Item
+5. Track Expiration Date
+6. Automatic Expiration Status
+7. Mark as Consumed
+8. Consumption History
+9. MySQL Database
+10. Node.js + Express.js Backend
+
+
+These features are enough to demonstrate the main purpose
+of ShelfLife and its database functionality.
+
+
+============================================================
+                    28. PROJECT OBJECTIVE
+============================================================
+
+ShelfLife aims to provide users with a simple web-based
+system for managing pantry inventory, monitoring expiration
+dates, updating food quantities, and recording consumed items.
+
+The project also demonstrates the practical application of
+relational database management, CRUD operations, REST API
+development, and server-side programming using Node.js.
+
+
+============================================================
+                      END OF PLAN
+============================================================
+
+
+
+
+                    SHELFLIFE
+------------------------------------------------
+| Dashboard | Pantry | Expiring | History      |
+------------------------------------------------
+
+                 DASHBOARD
+
+  [ 12 ]          [ 3 ]          [ 1 ]
+  Items           Expiring       Expired
+
+
+              EXPIRING SOON
+
+  Milk       Dairy       Sept 30    [Consume]
+  Bread      Bakery      Sept 29    [Consume]
+
+
+              RECENT ITEMS
+
+  Canned Tuna    4 pcs    Dec 15
+  Juice          2 pcs    Oct 10
+
+                         [+ Add Item]
