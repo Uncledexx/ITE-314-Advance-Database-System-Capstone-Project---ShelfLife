@@ -1,0 +1,314 @@
+============================================================
+                    MINI CAPSTONE DOCUMENT
+============================================================
+
+PROJECT TITLE:
+
+SHELFLIFE: A WEB-BASED PERSONAL PANTRY AND
+EXPIRATION DATE TRACKER
+
+
+PREPARED BY:
+
+[NAME OF MEMBER 1]
+[NAME OF MEMBER 2]
+[NAME OF MEMBER 3]
+[NAME OF MEMBER 4]
+
+
+SUBMITTED TO:
+
+[INSTRUCTOR'S NAME]
+
+
+SUBJECT:
+
+ADVANCED DATABASE MANAGEMENT
+
+
+PROGRAM:
+
+BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY
+
+
+[NAME OF SCHOOL]
+
+
+============================================================
+                         ABSTRACT
+============================================================
+
+[Write a brief summary of the project here.]
+
+ShelfLife is a web-based pantry management system designed to
+help users organize and monitor food items stored at home. The
+system allows users to record pantry items, track quantities
+and expiration dates, and identify items that are expiring soon
+or have already expired. Users can also mark food items as
+consumed, allowing the system to maintain a record of previously
+used items.
+
+The system will be developed using Node.js and Express.js for
+the backend and MySQL for database management. The proposed
+system aims to provide a simple and organized way of managing
+household food inventory while helping users reduce food waste
+and avoid overlooking expired products.
+
+Keywords: Pantry Management, Expiration Tracking, Node.js,
+MySQL, Database Management
+
+
+============================================================
+                    TABLE OF CONTENTS
+============================================================
+
+TITLE PAGE .................................................. i
+
+ABSTRACT .................................................... ii
+
+TABLE OF CONTENTS .......................................... iii
+
+CHAPTER 1 - INTRODUCTION .................................... 1
+
+    Background of the Study ................................ 1
+    Statement of the Problem ................................ 2
+    Objectives of the Study ................................ 3
+        General Objective ................................... 3
+        Specific Objectives ................................. 3
+    Significance of the Study ............................... 4
+    Scope and Limitations ................................... 5
+    Definition of Terms ..................................... 6
+
+CHAPTER 2 - REVIEW OF RELATED LITERATURE AND SYSTEMS ....... 7
+
+    Related Literature ...................................... 7
+    Related Systems ......................................... 9
+    Related Technologies .................................... 11
+    Synthesis ............................................... 13
+
+
+============================================================
+              CHAPTER 1 - INTRODUCTION
+============================================================
+
+
+1.1 BACKGROUND OF THE STUDY
+
+[Write the background of your project here.]
+
+Explain the problem of managing food and household items in a
+pantry. Discuss how people may forget expiration dates, purchase
+items they already have, or fail to use food before it expires.
+
+Then introduce ShelfLife as the proposed solution.
+
+Explain that ShelfLife is a web-based system that allows users
+to record pantry items, monitor expiration dates, manage
+quantities, and mark items as consumed.
+
+Also explain why using a database is important for storing and
+managing the pantry information.
+
+
+1.2 STATEMENT OF THE PROBLEM
+
+The study aims to address the following problems:
+
+1. How can users efficiently record and organize their pantry
+   items?
+
+2. How can users easily monitor the expiration dates of food
+   products?
+
+3. How can the system identify items that are expired or
+   approaching their expiration dates?
+
+4. How can users update the quantity of pantry items after
+   consuming or using them?
+
+5. How can the system maintain a record of consumed pantry
+   items?
+
+
+1.3 OBJECTIVES OF THE STUDY
+
+1.3.1 GENERAL OBJECTIVE
+
+To develop a web-based pantry management system that allows
+users to organize pantry items, monitor expiration dates, and
+track consumed food products.
+
+
+1.3.2 SPECIFIC OBJECTIVES
+
+The system aims to:
+
+1. Allow users to add and store pantry items in the database.
+
+2. Allow users to view, edit, and delete pantry items.
+
+3. Track the quantity and expiration date of each pantry item.
+
+4. Automatically identify items that are available, expiring
+   soon, or expired.
+
+5. Allow users to mark food items as consumed.
+
+6. Maintain a history of consumed pantry items.
+
+7. Provide a simple dashboard showing pantry information and
+   expiration status.
+
+
+1.4 SIGNIFICANCE OF THE STUDY
+
+The proposed ShelfLife system may benefit the following:
+
+HOME USERS
+
+ShelfLife can help users organize their pantry and monitor
+food expiration dates more conveniently.
+
+HOUSEHOLDS
+
+The system can help households keep track of available food
+items and reduce unnecessary food waste.
+
+STUDENTS
+
+The project can serve as an example of applying database
+management concepts and web development technologies in a
+practical system.
+
+FUTURE DEVELOPERS
+
+The system can serve as a reference for future projects
+involving inventory management, expiration tracking, and
+database-driven web applications.
+
+
+1.5 SCOPE AND LIMITATIONS
+
+SCOPE
+
+ShelfLife focuses on managing food and household items stored
+in a user's pantry. The system will allow users to add, view,
+edit, and delete pantry items. It will also track item
+quantities and expiration dates.
+
+The system will categorize items according to their type and
+automatically determine whether an item is available, expiring
+soon, or expired.
+
+Users will also be able to mark items as consumed. Consumed
+items may be stored in a consumption history for record
+purposes.
+
+The system will use Node.js and Express.js for the backend and
+MySQL for database management.
+
+
+LIMITATIONS
+
+The system will not include online grocery purchasing,
+barcode scanning, payment processing, or automatic food
+recognition.
+
+The system will depend on users to enter accurate information
+such as item names, quantities, purchase dates, and expiration
+dates.
+
+The system is intended primarily for personal or household
+pantry management.
+
+
+1.6 DEFINITION OF TERMS
+
+PANTRY ITEM
+
+A food or household product recorded and stored in the
+ShelfLife system.
+
+EXPIRATION DATE
+
+The date provided by the manufacturer indicating when a
+product should no longer be considered suitable for use.
+
+CONSUMED
+
+A status indicating that a pantry item has already been eaten
+or used.
+
+EXPIRATION STATUS
+
+The system-generated condition of an item based on its
+expiration date.
+
+NODE.JS
+
+A JavaScript runtime used to run the backend of the ShelfLife
+application.
+
+EXPRESS.JS
+
+A Node.js web framework used to create the application's
+server and API routes.
+
+MYSQL
+
+A relational database management system used to store and
+manage ShelfLife data.
+
+CRUD
+
+The basic database operations of Create, Read, Update, and
+Delete.
+
+
+============================================================
+      CHAPTER 2 - REVIEW OF RELATED LITERATURE AND SYSTEMS
+============================================================
+
+
+2.1 RELATED LITERATURE
+
+[Discuss existing studies, articles, books, or other sources
+related to pantry management, food waste, expiration tracking,
+inventory systems, and database management.]
+
+2.2 RELATED SYSTEMS
+
+[Discuss existing applications or systems that have similar
+functions to ShelfLife.]
+
+2.3 RELATED TECHNOLOGIES
+
+2.3.1 NODE.JS
+
+[Discuss Node.js and its relevance to the project.]
+
+2.3.2 EXPRESS.JS
+
+[Discuss Express.js and how it will be used in the system.]
+
+2.3.3 MYSQL
+
+[Discuss MySQL and its role in storing and managing the
+system's data.]
+
+2.3.4 HTML, CSS, AND JAVASCRIPT
+
+[Discuss how these technologies will be used for the
+front-end/interface of ShelfLife.]
+
+2.4 SYNTHESIS
+
+[Summarize the related literature, systems, and technologies.
+Explain how these references support the development of
+ShelfLife and identify the purpose or gap that your proposed
+system addresses.]
+
+
+============================================================
+                       END OF DOCUMENT
+============================================================
