@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +19,107 @@
             <a class="button" href="/pantry/add">+ Add Food</a>
         </section>
 
+        <!-- Search, filter, and sort -->
         <section class="panel">
+            <h2>Find Pantry Items</h2>
+
+            <form action="/pantry" method="GET">
+                <div class="form-group">
+                    <label for="search">Search food name</label>
+                    <input
+                        type="search"
+                        id="search"
+                        name="search"
+                        placeholder="Example: Milk"
+                        value="<%= filters.search %>"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category">
+                        <option value="">All Categories</option>
+
+                        <% categories.forEach(category => { %>
+                            <option
+                                value="<%= category.id %>"
+                                <%= String(filters.categoryId) === String(category.id) ? 'selected' : '' %>
+                            >
+                                <%= category.name %>
+                            </option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Expiration Status</label>
+                    <select id="status" name="status">
+                        <option value="" <%= filters.status === '' ? 'selected' : '' %>>
+                            All Statuses
+                        </option>
+
+                        <option value="available" <%= filters.status === 'available' ? 'selected' : '' %>>
+                            Available
+                        </option>
+
+                        <option value="expiring" <%= filters.status === 'expiring' ? 'selected' : '' %>>
+                            Expiring Soon
+                        </option>
+
+                        <option value="expired" <%= filters.status === 'expired' ? 'selected' : '' %>>
+                            Expired
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sort">Sort By</label>
+                    <select id="sort" name="sort">
+                        <option value="expiration_asc" <%= filters.sort === 'expiration_asc' ? 'selected' : '' %>>
+                            Expiration Date (Soonest First)
+                        </option>
+
+                        <option value="expiration_desc" <%= filters.sort === 'expiration_desc' ? 'selected' : '' %>>
+                            Expiration Date (Latest First)
+                        </option>
+
+                        <option value="name_asc" <%= filters.sort === 'name_asc' ? 'selected' : '' %>>
+                            Food Name (A–Z)
+                        </option>
+
+                        <option value="name_desc" <%= filters.sort === 'name_desc' ? 'selected' : '' %>>
+                            Food Name (Z–A)
+                        </option>
+
+                        <option value="quantity_asc" <%= filters.sort === 'quantity_asc' ? 'selected' : '' %>>
+                            Quantity (Lowest First)
+                        </option>
+
+                        <option value="quantity_desc" <%= filters.sort === 'quantity_desc' ? 'selected' : '' %>>
+                            Quantity (Highest First)
+                        </option>
+                    </select>
+                </div>
+
+                <button class="button" type="submit">Apply Filters</button>
+                <a class="button" href="/pantry">Clear Filters</a>
+            </form>
+        </section>
+
+        <!-- Pantry items -->
+        <section class="panel">
+            <h2>Your Food Items</h2>
+
             <% if (items.length === 0) { %>
-                <p class="empty">Your pantry is empty. Add a food item to get started.</p>
+                <p class="empty">
+                    No pantry items match your search or filters.
+                    <a href="/pantry">View all pantry items</a>
+                </p>
             <% } else { %>
+
+                <p class="muted">
+                    Showing <%= items.length %> pantry item(s).
+                </p>
 
                 <div class="table-wrapper">
                     <table>
@@ -41,6 +139,7 @@
                             <% items.forEach(item => { %>
                                 <%
                                     const today = new Date();
+
                                     const todayDate = new Date(
                                         today.getFullYear(),
                                         today.getMonth(),
@@ -105,7 +204,10 @@
                                             </button>
                                         </form>
 
-                                        <form action="/pantry/consume/<%= item.id %>" method="POST">
+                                        <form
+                                            action="/pantry/consume/<%= item.id %>"
+                                            method="POST"
+                                        >
                                             <label for="quantity-<%= item.id %>">
                                                 Consume quantity
                                             </label>
