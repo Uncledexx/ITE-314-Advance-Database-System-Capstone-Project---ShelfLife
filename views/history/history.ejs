@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShelfLife - Consumption History</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <%- include('../partials/header') %>
+
+    <main class="container">
+        <section class="panel">
+            <h1>Consumption History</h1>
+            <p class="muted">Review the food and quantities you've consumed.</p>
+
+            <% if (history.length === 0) { %>
+                <p class="empty">No consumption records yet.</p>
+            <% } else { %>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Food Name</th>
+                                <th>Quantity Consumed</th>
+                                <th>Consumed At</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% history.forEach(record => { %>
+                                <tr>
+                                    <td><%= record.food_name %></td>
+                                    <td><%= record.quantity %></td>
+                                    <td><%= record.consumed_at %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } %>
+
+            <p>
+                <a class="button" href="/pantry">Back to Pantry</a>
+                <a class="button button-secondary" href="/dashboard">Dashboard</a>
+            </p>
+        </section>
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

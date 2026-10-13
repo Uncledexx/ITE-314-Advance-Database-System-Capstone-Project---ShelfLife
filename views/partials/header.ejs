@@ -1,0 +1,22 @@
+<header class="site-header">
+    <div class="header-inner">
+        <a class="brand" href="<%= currentUser ? '/dashboard' : '/' %>">
+            <span class="brand-mark">S</span>
+            <span>ShelfLife</span>
+        </a>
+
+        <nav class="main-nav">
+            <% if (currentUser) { %>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/pantry">My Pantry</a>
+                <a href="/pantry/add">Add Food</a>
+                <a href="/categories">Categories</a>
+                <a href="/history">History</a>
+                <a class="nav-logout" href="/logout">Log out</a>
+            <% } else { %>
+                <a href="/login">Log in</a>
+                <a href="/register">Register</a>
+            <% } %>
+        </nav>
+    </div>
+</header>

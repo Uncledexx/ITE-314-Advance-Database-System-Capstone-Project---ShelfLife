@@ -3,25 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ShelfLife - Categories</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
 
-    <h1>Categories</h1>
+    <%- include('../partials/header') %>
 
-    <ul>
-        <% categories.forEach(category => { %>
+    <main class="container">
+        <section class="panel">
+            <h1>Food Categories</h1>
+            <p class="muted">Browse the categories available in ShelfLife.</p>
 
-            <li>
-                <%= category.name %>
-            </li>
+            <% if (categories.length === 0) { %>
+                <p class="empty">No categories found.</p>
+            <% } else { %>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Category Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% categories.forEach(category => { %>
+                                <tr>
+                                    <td><%= category.id %></td>
+                                    <td><%= category.name %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } %>
 
-        <% }); %>
-    </ul>
+            <p>
+                <a class="button" href="/pantry/add">Add Food</a>
+                <a class="button button-secondary" href="/dashboard">Dashboard</a>
+            </p>
+        </section>
+    </main>
 
-    <a href="/">Back to Home</a>
+    <%- include('../partials/footer') %>
 
 </body>
 </html>

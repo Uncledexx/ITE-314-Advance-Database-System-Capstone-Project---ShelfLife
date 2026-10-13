@@ -3,36 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ShelfLife</title>
+    <title>ShelfLife - Home</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ShelfLife</title>
-</head>
-
 <body>
 
-    <h1>Welcome to ShelfLife</h1>
+    <%- include('partials/header') %>
 
-    <p>Your personal pantry and expiration date tracker.</p>
+    <main class="container">
+        <section class="panel">
+            <h1>Welcome to ShelfLife</h1>
+            <p class="muted">
+                Keep track of your pantry, monitor expiration dates,
+                and record the food you consume.
+            </p>
 
-    <p>
-        <a href="/register">Register</a>
-    </p>
+            <p>
+                <a class="button" href="/register">Get Started</a>
+                <a class="button button-secondary" href="/login">Log In</a>
+            </p>
+        </section>
+    </main>
 
-    <p>
-        <a href="/login">Login</a>
-    </p>
-
-    <p>
-        <a href="/categories">View Categories</a>
-    </p>
+    <%- include('partials/footer') %>
 
 </body>
 </html>

@@ -1,147 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ShelfLife - Pantry</title>
+    <title>ShelfLife - My Pantry</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
 
-    <h1>My Pantry</h1>
+    <%- include('../partials/header') %>
 
-    <p>
-        Welcome, <%= typeof user !== 'undefined' ? user.name : '' %>
-    </p>
+    <main class="container">
+        <section class="panel">
+            <h1>My Pantry</h1>
+            <p class="muted">Manage your food items and expiration dates.</p>
 
-    <p>
-        <a href="/pantry/add">Add Pantry Item</a>
-    </p>
+            <a class="button" href="/pantry/add">+ Add Food</a>
+        </section>
 
-    <hr>
+        <section class="panel">
+            <% if (items.length === 0) { %>
+                <p class="empty">Your pantry is empty. Add a food item to get started.</p>
+            <% } else { %>
 
-    <% if (items.length === 0) { %>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>Category</th>
+                                <th>Quantity</th>
+                                <th>Purchase Date</th>
+                                <th>Expiration Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
 
-        <p>Your pantry is empty.</p>
+                        <tbody>
+                            <% items.forEach(item => { %>
+                                <%
+                                    const today = new Date();
+                                    const todayDate = new Date(
+                                        today.getFullYear(),
+                                        today.getMonth(),
+                                        today.getDate()
+                                    );
 
-    <% } else { %>
+                                    const expirationDate = new Date(
+                                        item.expiration_date.getFullYear(),
+                                        item.expiration_date.getMonth(),
+                                        item.expiration_date.getDate()
+                                    );
 
-        <table border="1" cellpadding="10">
+                                    const daysRemaining = Math.round(
+                                        (expirationDate - todayDate) /
+                                        (1000 * 60 * 60 * 24)
+                                    );
 
-            <thead>
+                                    let status;
+                                    let statusClass;
 
-                <tr>
-                    <th>Food Name</th>
-                    <th>Category</th>
-                    <th>Quantity</th>
-                    <th>Purchase Date</th>
-                    <th>Expiration Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
+                                    if (daysRemaining < 0) {
+                                        status = 'EXPIRED';
+                                        statusClass = 'status-expired';
+                                    } else if (daysRemaining <= 7) {
+                                        status = 'EXPIRING SOON';
+                                        statusClass = 'status-expiring';
+                                    } else {
+                                        status = 'AVAILABLE';
+                                        statusClass = 'status-available';
+                                    }
+                                %>
 
-            </thead>
+                                <tr>
+                                    <td><%= item.name %></td>
+                                    <td><%= item.category_name %></td>
+                                    <td><%= item.quantity %></td>
 
-            <tbody>
+                                    <td>
+                                        <%= item.purchase_date.getFullYear() %>-<%= String(item.purchase_date.getMonth() + 1).padStart(2, '0') %>-<%= String(item.purchase_date.getDate()).padStart(2, '0') %>
+                                    </td>
 
-                <% items.forEach(item => { %>
+                                    <td>
+                                        <%= item.expiration_date.getFullYear() %>-<%= String(item.expiration_date.getMonth() + 1).padStart(2, '0') %>-<%= String(item.expiration_date.getDate()).padStart(2, '0') %>
+                                    </td>
 
-                    <tr>
+                                    <td>
+                                        <span class="status <%= statusClass %>">
+                                            <%= status %>
+                                        </span>
+                                    </td>
 
-                        <td>
-                            <%= item.name %>
-                        </td>
+                                    <td>
+                                        <a href="/pantry/edit/<%= item.id %>">Edit</a>
 
-                        <td>
-                            <%= item.category_name %>
-                        </td>
+                                        <form
+                                            action="/pantry/delete/<%= item.id %>"
+                                            method="POST"
+                                            onsubmit="return confirm('Delete this pantry item?');"
+                                        >
+                                            <button class="button-danger" type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
 
-                        <td>
-                            <%= item.quantity %>
-                        </td>
+                                        <form action="/pantry/consume/<%= item.id %>" method="POST">
+                                            <label for="quantity-<%= item.id %>">
+                                                Consume quantity
+                                            </label>
 
-                      <td>
-    <%= item.purchase_date.getFullYear() %>-<%= String(item.purchase_date.getMonth() + 1).padStart(2, '0') %>-<%= String(item.purchase_date.getDate()).padStart(2, '0') %>
-</td>
+                                            <input
+                                                type="number"
+                                                id="quantity-<%= item.id %>"
+                                                name="quantity"
+                                                min="1"
+                                                max="<%= item.quantity %>"
+                                                value="1"
+                                                required
+                                            >
 
-<td>
-    <%= item.expiration_date.getFullYear() %>-<%= String(item.expiration_date.getMonth() + 1).padStart(2, '0') %>-<%= String(item.expiration_date.getDate()).padStart(2, '0') %>
-</td>
+                                            <button type="submit">Consume</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
 
-                        <td>
+            <% } %>
+        </section>
+    </main>
 
-    <%
-        const today = new Date();
-
-        const todayDate = new Date(
-            today.getFullYear(),
-            today.getMonth(),
-            today.getDate()
-        );
-
-        const expirationDate = new Date(
-            item.expiration_date.getFullYear(),
-            item.expiration_date.getMonth(),
-            item.expiration_date.getDate()
-        );
-
-        const difference = expirationDate - todayDate;
-
-        const daysRemaining = Math.round(
-            difference / (1000 * 60 * 60 * 24)
-        );
-
-        let status;
-
-        if (daysRemaining < 0) {
-            status = 'EXPIRED';
-        } else if (daysRemaining <= 7) {
-            status = 'EXPIRING SOON';
-        } else {
-            status = 'AVAILABLE';
-        }
-    %>
-
-    <%= status %>
-
-</td>
-
-                        <td>
-
-                            <a href="/pantry/edit/<%= item.id %>">
-                                Edit
-                            </a>
-
-                            <form
-                                action="/pantry/delete/<%= item.id %>"
-                                method="POST"
-                                style="display:inline;"
-                            >
-
-                                <button type="submit">
-                                    Delete
-                                </button>
-
-                            </form>
-
-                        </td>
-
-                    </tr>
-
-                <% }); %>
-
-            </tbody>
-
-        </table>
-
-    <% } %>
-
-    <br>
-
-    <a href="/dashboard">Back to Dashboard</a>
+    <%- include('../partials/footer') %>
 
 </body>
-
 </html>

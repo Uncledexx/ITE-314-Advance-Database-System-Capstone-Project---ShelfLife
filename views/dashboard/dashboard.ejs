@@ -1,53 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ShelfLife - Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
+      <%- include('../partials/header') %>
 
-    <h1>Welcome to ShelfLife!</h1>
+    <main class="container">
+<div class="container">
 
-    <p>
-        Hello, <%= user.name %>!
-    </p>
+    <header>
+        <div>
+            <h1>ShelfLife</h1>
+            <p>Welcome back, <%= user.name %>!</p>
+        </div>
 
-    <hr>
+        <a href="/logout">Log out</a>
+    </header>
 
-    <h2>Navigation</h2>
+    <nav>
+        <a class="nav-link" href="/pantry">My Pantry</a>
+        <a class="nav-link" href="/pantry/add">Add Food</a>
+        <a class="nav-link" href="/categories">Categories</a>
+        <a class="nav-link" href="/history">Consumption History</a>
+    </nav>
 
-    <ul>
+    <h2>Pantry Overview</h2>
 
-        <li>
-            <a href="/pantry">
-                My Pantry
-            </a>
-        </li>
+    <section class="stats-grid">
 
-        <li>
-            <a href="/pantry/add">
-                Add Pantry Item
-            </a>
-        </li>
+        <div class="stat-card">
+            <p>Active Pantry Items</p>
+            <h2><%= stats.total_items %></h2>
+        </div>
 
-        <li>
-            <a href="/categories">
-                Categories
-            </a>
-        </li>
+        <div class="stat-card">
+            <p>Total Units in Pantry</p>
+            <h2><%= stats.total_quantity %></h2>
+        </div>
 
-        <li>
-            <a href="/logout">
-                Logout
-            </a>
-        </li>
+        <div class="stat-card">
+            <p>Expiring Within 7 Days</p>
+            <h2><%= stats.expiring_soon %></h2>
+        </div>
 
-    </ul>
+        <div class="stat-card">
+            <p>Expired Items</p>
+            <h2><%= stats.expired_items %></h2>
+        </div>
+
+        <div class="stat-card">
+            <p>Total Units Consumed</p>
+            <h2><%= historyStats.total_consumed %></h2>
+        </div>
+
+        <div class="stat-card">
+            <p>Consumption Events</p>
+            <h2><%= historyStats.consumption_records %></h2>
+        </div>
+
+    </section>
+
+    <section class="panel">
+        <h2>Recently Added Food</h2>
+
+        <% if (recentItems.length === 0) { %>
+
+            <p class="empty">Your pantry is empty. Add your first food item to get started.</p>
+
+        <% } else { %>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Expiration Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% recentItems.forEach(item => { %>
+                        <tr>
+                            <td><%= item.name %></td>
+                            <td><%= item.category_name %></td>
+                            <td><%= item.quantity %></td>
+                            <td>
+                                <%= item.expiration_date.getFullYear() %>-<%= String(item.expiration_date.getMonth() + 1).padStart(2, '0') %>-<%= String(item.expiration_date.getDate()).padStart(2, '0') %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+        <% } %>
+
+        <a class="bottom-link" href="/pantry">View all pantry items →</a>
+    </section>
+
+    <section class="panel">
+        <h2>Recent Consumption</h2>
+
+        <% if (recentHistory.length === 0) { %>
+
+            <p class="empty">No consumption has been recorded yet.</p>
+
+        <% } else { %>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food</th>
+                        <th>Quantity Consumed</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% recentHistory.forEach(record => { %>
+                        <tr>
+                            <td><%= record.food_name %></td>
+                            <td><%= record.quantity %></td>
+                            <td><%= record.consumed_at %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+        <% } %>
+
+        <a class="bottom-link" href="/history">View full history →</a>
+    </section>
+
+</div>
+  </main>
+
+    <%- include('../partials/footer') %>
 
 </body>
-
 </html>

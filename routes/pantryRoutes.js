@@ -41,4 +41,10 @@ router.post(
     pantryController.deleteItem
 );
 
+router.post(
+    '/consume/:id',
+    requireLogin,
+    pantryController.consumeItem
+);
+
 module.exports = router;

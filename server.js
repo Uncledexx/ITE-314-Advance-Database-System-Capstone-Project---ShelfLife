@@ -6,6 +6,8 @@ const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const pantryRoutes = require('./routes/pantryRoutes');
 const requireLogin = require('./middleware/authMiddleware');
+const historyRoutes = require('./routes/historyRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -18,6 +20,17 @@ app.use(session({
     saveUninitialized: false
 }));
 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.session.userId
+        ? {
+            id: req.session.userId,
+            name: req.session.userName
+        }
+        : null;
+
+    next();
+});
+
 const PORT = 3000;
 
 app.get('/', (req, res) => {
@@ -26,17 +39,11 @@ app.get('/', (req, res) => {
 app.use('/', authRoutes);
 
 
-app.get('/dashboard', requireLogin, (req, res) => {
-    res.render('dashboard/dashboard', {
-        user: {
-            name: req.session.userName
-        }
-    });
-});
-
+app.use('/dashboard', dashboardRoutes);
 
 app.use('/categories', categoryRoutes);
 app.use('/pantry', pantryRoutes);
+app.use('/history', historyRoutes);
 
 
 

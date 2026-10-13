@@ -109,11 +109,55 @@ function deletePantryItem(id, userId, callback) {
 
     db.query(sql, [id, userId], callback);
 }
+function updateQuantity(
+    id,
+    userId,
+    quantity,
+    callback
+) {
+    const sql = `
+        UPDATE pantry_items
+        SET quantity = ?
+        WHERE id = ? AND user_id = ?
+    `;
+
+    db.query(
+        sql,
+        [
+            quantity,
+            id,
+            userId
+        ],
+        callback
+    );
+}
+
+function deletePantryItemById(
+    id,
+    userId,
+    callback
+) {
+    const sql = `
+        DELETE FROM pantry_items
+        WHERE id = ? AND user_id = ?
+    `;
+
+    db.query(
+        sql,
+        [
+            id,
+            userId
+        ],
+        callback
+    );
+}
 
 module.exports = {
     getAllPantryItems,
     getPantryItemById,
     createPantryItem,
     updatePantryItem,
-    deletePantryItem
+    deletePantryItem,
+    updateQuantity,
+    deletePantryItemById
 };

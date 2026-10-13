@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ShelfLife - Login</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
 
-    <h1>Login to ShelfLife</h1>
+    <%- include('../partials/header') %>
 
-    <form action="/login" method="POST">
+    <main class="container">
+        <section class="form-card">
+            <h1>Welcome Back</h1>
+            <p class="muted">Log in to manage your pantry.</p>
 
-        <div>
-            <label for="email">Email:</label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                required
-            >
-        </div>
+            <form action="/login" method="POST">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                >
 
-        <br>
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="current-password"
+                    required
+                >
 
-        <div>
-            <label for="password">Password:</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                required
-            >
-        </div>
+                <button type="submit">Log In</button>
+            </form>
 
-        <br>
+            <p>
+                Don't have an account?
+                <a href="/register">Create an account</a>
+            </p>
+        </section>
+    </main>
 
-        <button type="submit">Login</button>
-
-    </form>
-
-    <p>
-        Don't have an account?
-        <a href="/register">Register</a>
-    </p>
+    <%- include('../partials/footer') %>
 
 </body>
 </html>

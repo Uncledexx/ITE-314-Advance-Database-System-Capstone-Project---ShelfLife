@@ -1,130 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ShelfLife - Add Item</title>
+    <title>ShelfLife - Add Food</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
 
-    <h1>Add Pantry Item</h1>
+    <%- include('../partials/header') %>
 
-    <form action="/pantry" method="POST">
+    <main class="container">
+        <section class="form-card">
+            <h1>Add Pantry Item</h1>
+            <p class="muted">Enter the food details below.</p>
 
-        <div>
+            <form action="/pantry" method="POST">
+                <label for="name">Food Name</label>
+                <input type="text" id="name" name="name" required>
 
-            <label for="name">
-                Food Name:
-            </label>
+                <label for="category_id">Category</label>
+                <select id="category_id" name="category_id" required>
+                    <option value="">Select a category</option>
 
-            <input
-                type="text"
-                id="name"
-                name="name"
-                required
-            >
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category.id %>">
+                            <%= category.name %>
+                        </option>
+                    <% }); %>
+                </select>
 
-        </div>
+                <label for="quantity">Quantity</label>
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    value="1"
+                    required
+                >
 
-        <br>
+                <label for="purchase_date">Purchase Date</label>
+                <input
+                    type="date"
+                    id="purchase_date"
+                    name="purchase_date"
+                    required
+                >
 
-        <div>
+                <label for="expiration_date">Expiration Date</label>
+                <input
+                    type="date"
+                    id="expiration_date"
+                    name="expiration_date"
+                    required
+                >
 
-            <label for="category_id">
-                Category:
-            </label>
+                <button type="submit">Save Pantry Item</button>
+                <a class="button button-secondary" href="/pantry">Cancel</a>
+            </form>
+        </section>
+    </main>
 
-            <select
-                id="category_id"
-                name="category_id"
-                required
-            >
-
-                <option value="">
-                    Select a category
-                </option>
-
-                <% categories.forEach(category => { %>
-
-                    <option value="<%= category.id %>">
-                        <%= category.name %>
-                    </option>
-
-                <% }); %>
-
-            </select>
-
-        </div>
-
-        <br>
-
-        <div>
-
-            <label for="quantity">
-                Quantity:
-            </label>
-
-            <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="1"
-                required
-            >
-
-        </div>
-
-        <br>
-
-        <div>
-
-            <label for="purchase_date">
-                Purchase Date:
-            </label>
-
-            <input
-                type="date"
-                id="purchase_date"
-                name="purchase_date"
-                required
-            >
-
-        </div>
-
-        <br>
-
-        <div>
-
-            <label for="expiration_date">
-                Expiration Date:
-            </label>
-
-            <input
-                type="date"
-                id="expiration_date"
-                name="expiration_date"
-                required
-            >
-
-        </div>
-
-        <br>
-
-        <button type="submit">
-            Add Item
-        </button>
-
-    </form>
-
-    <br>
-
-    <a href="/pantry">
-        Back to Pantry
-    </a>
+    <%- include('../partials/footer') %>
 
 </body>
-
 </html>
